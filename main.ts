@@ -1,3 +1,12 @@
+info.onCountdownEnd(function () {
+    info.changeLifeBy(-1)
+    info.startCountdown(200)
+})
+sprites.onOverlap(SpriteKind.Player, SpriteKind.Food, function (sprite, otherSprite) {
+    otherSprite.setPosition(randint(20, 140), randint(10, 110))
+    info.changeScoreBy(1)
+    info.startCountdown(10000)
+})
 let donut = sprites.create(img`
     . . . . . . b b b b a a . . . . 
     . . . . b b d d d 3 3 3 a a . . 
@@ -15,7 +24,38 @@ let donut = sprites.create(img`
     . . e e b b 4 4 4 4 b e e . . . 
     . . . e e e e e e e e . . . . . 
     . . . . . . . . . . . . . . . . 
-    `, 0)
-controller.moveSprite(donut, 200, 200)
+    `, SpriteKind.Player)
+controller.moveSprite(donut, 100, 100)
 donut.setStayInScreen(true)
 scene.setBackgroundColor(6)
+let mySprite = sprites.create(img`
+    . . . . . . . . . . . . . . . . 
+    . . . . . . 6 6 6 6 . . . . . . 
+    . . . . 6 6 6 5 5 6 6 6 . . . . 
+    . . . 7 7 7 7 6 6 6 6 6 6 . . . 
+    . . 6 7 7 7 7 8 8 8 1 1 6 6 . . 
+    . . 7 7 7 7 7 8 8 8 1 1 5 6 . . 
+    . 6 7 7 7 7 8 8 8 8 8 5 5 6 6 . 
+    . 6 7 7 7 8 8 8 6 6 6 6 5 6 6 . 
+    . 6 6 7 7 8 8 6 6 6 6 6 6 6 6 . 
+    . 6 8 7 7 8 8 6 6 6 6 6 6 6 6 . 
+    . . 6 8 7 7 8 6 6 6 6 6 8 6 . . 
+    . . 6 8 8 7 8 8 6 6 6 8 6 6 . . 
+    . . . 6 8 8 8 8 8 8 8 8 6 . . . 
+    . . . . 6 6 8 8 8 8 6 6 . . . . 
+    . . . . . . 6 6 6 6 . . . . . . 
+    . . . . . . . . . . . . . . . . 
+    `, SpriteKind.Food)
+mySprite.setPosition(randint(20, 140), randint(10, 110))
+let timer = 10
+info.startCountdown(timer)
+info.setLife(3)
+music.setVolume(5)
+game.onUpdate(function () {
+    if (info.score() == 100) {
+        if (true) {
+        	
+        }
+        game.over(true)
+    }
+})
